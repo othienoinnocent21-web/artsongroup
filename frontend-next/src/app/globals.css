@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0b2240;
+  --color-navy-dark: #081a33;
+  --color-navy-light: #1e3b66;
+  --color-accent: #1f78d4;
+  --color-accent-2: #00b4d8;
+  --color-muted-dark: #aab8cc;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    margin: 0;
+    background: #fff;
+    color: #1a2332;
+    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none !important;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+}
+
+@layer utilities {
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Hero section ─────────────────────────────────── */
+.hero-section {
+  overflow: hidden;
+  background: #fcfef9;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 390px;
+  isolation: isolate;
+}
+
+.hero-visual::before {
+  position: absolute;
+  z-index: -1;
+  width: min(78%, 340px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(132, 204, 22, 0.14), rgba(132, 204, 22, 0.04) 65%, transparent 66%);
+  content: '';
+}
+
+.hero-orbit {
+  position: absolute;
+  width: min(70%, 300px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(132, 204, 22, 0.25);
+  border-radius: 50%;
+}
+
+.hero-center {
+  width: 170px;
+  height: 170px;
+  border: 1px solid rgba(132, 204, 22, 0.2);
+  border-radius: 2rem;
+  background: linear-gradient(145deg, #fff, #f1f9e6);
+  box-shadow: 0 1.5rem 4rem rgba(75, 105, 42, 0.12);
+  color: #84cc16;
+  font-size: 6rem;
+  transform: rotate(-8deg);
+}
+
+.hero-center .bi {
+  transform: rotate(8deg);
+}
+
+.hero-chip {
+  position: absolute;
+  padding: 0.8rem 1rem;
+  border: 1px solid #edf1e7;
+  border-radius: 0.8rem;
+  background: #fff;
+  box-shadow: 0 0.75rem 2rem rgba(33, 48, 19, 0.08);
+  color: #495057;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.hero-chip-top {
+  top: 15%;
+  right: 3%;
+}
+
+.hero-chip-bottom {
+  bottom: 15%;
+  left: 3%;
+}
+
+@media (max-width: 575.98px) {
+  .hero-visual {
+    min-height: 300px;
+  }
+
+  .hero-center {
+    width: 135px;
+    height: 135px;
+    font-size: 4.5rem;
+  }
+
+  .hero-chip {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* ── Services page animations ─────────────────────── */
+.services-page {
+  overflow-x: clip;
+}
+
+.services-animations-ready [data-aos] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 650ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.services-animations-ready [data-aos="fade-down"] {
+  transform: translate3d(0, -1rem, 0);
+}
+
+.services-animations-ready [data-aos="fade-up"] {
+  transform: translate3d(0, 1.25rem, 0);
+}
+
+.services-animations-ready [data-aos].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.services-page [data-aos-delay="100"] { transition-delay: 100ms; }
+.services-page [data-aos-delay="200"] { transition-delay: 200ms; }
+.services-page [data-aos-delay="300"] { transition-delay: 300ms; }
+.services-page [data-aos-delay="400"] { transition-delay: 400ms; }
+.services-page [data-aos-delay="500"] { transition-delay: 500ms; }
+.services-page [data-aos-delay="600"] { transition-delay: 600ms; }
+
+.services-page .service-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.services-page .service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-animations-ready [data-aos] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .services-page .service-card,
+  .services-page .service-card:hover {
+    transform: none;
+    transition: none;
+  }
+}
