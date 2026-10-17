@@ -1,0 +1,83 @@
+.satesoft-hero {
+  overflow: hidden;
+  background: #fcfef9;
+}
+
+.satesoft-hero-visual {
+  position: relative;
+  min-height: 390px;
+  isolation: isolate;
+}
+
+.satesoft-hero-visual::before {
+  position: absolute;
+  z-index: -1;
+  width: min(78%, 340px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(132, 204, 22, 0.14), rgba(132, 204, 22, 0.04) 65%, transparent 66%);
+  content: '';
+}
+
+.satesoft-hero-orbit {
+  position: absolute;
+  width: min(70%, 300px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(132, 204, 22, 0.25);
+  border-radius: 50%;
+}
+
+.satesoft-hero-center {
+  width: 170px;
+  height: 170px;
+  border: 1px solid rgba(132, 204, 22, 0.2);
+  border-radius: 2rem;
+  background: linear-gradient(145deg, #fff, #f1f9e6);
+  box-shadow: 0 1.5rem 4rem rgba(75, 105, 42, 0.12);
+  color: #84cc16;
+  font-size: 6rem;
+  transform: rotate(-8deg);
+}
+
+.satesoft-hero-center .bi {
+  transform: rotate(8deg);
+}
+
+.satesoft-hero-chip {
+  position: absolute;
+  padding: 0.8rem 1rem;
+  border: 1px solid #edf1e7;
+  border-radius: 0.8rem;
+  background: #fff;
+  box-shadow: 0 0.75rem 2rem rgba(33, 48, 19, 0.08);
+  color: #495057;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.satesoft-hero-chip-top {
+  top: 15%;
+  right: 3%;
+}
+
+.satesoft-hero-chip-bottom {
+  bottom: 15%;
+  left: 3%;
+}
+
+@media (max-width: 575.98px) {
+  .satesoft-hero-visual {
+    min-height: 300px;
+  }
+
+  .satesoft-hero-center {
+    width: 135px;
+    height: 135px;
+    font-size: 4.5rem;
+  }
+
+  .satesoft-hero-chip {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
