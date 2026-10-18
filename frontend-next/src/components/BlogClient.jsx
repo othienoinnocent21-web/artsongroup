@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { Fragment, useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { articles } from '@/lib/articles'
@@ -210,9 +210,8 @@ export default function BlogClient() {
                 ) : (
                   <div className="bg-white/95 backdrop-blur-md rounded-3xl overflow-hidden shadow-2xl border border-white/20 grid grid-cols-1 md:grid-cols-12 transition duration-300">
                     {filteredArticles.map((article) => (
-                      <>
+                      <Fragment key={article.id}>
                         <div
-                          key={`img-${article.id}`}
                           className="md:col-span-6 relative h-64 md:h-auto overflow-hidden bg-slate-900/10"
                         >
                           <Image
@@ -226,10 +225,7 @@ export default function BlogClient() {
                             {article.category}
                           </span>
                         </div>
-                        <div
-                          key={`body-${article.id}`}
-                          className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between"
-                        >
+                        <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between">
                           <div>
                             <div className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-3">
                               <span>{article.date}</span>
@@ -257,7 +253,7 @@ export default function BlogClient() {
                             </Link>
                           </div>
                         </div>
-                      </>
+                      </Fragment>
                     ))}
                   </div>
                 )}

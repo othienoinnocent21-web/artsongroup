@@ -187,8 +187,31 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
 }
 
+.home-animations-ready [data-home-aos] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition-property: opacity, transform, translate, box-shadow, border-color, color, background-color;
+  transition-duration: 650ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--home-aos-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.home-animations-ready [data-home-aos].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .services-animations-ready [data-aos] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .home-animations-ready [data-home-aos],
+  .home-animations-ready [data-home-aos].is-visible {
     opacity: 1;
     transform: none;
     transition: none;
@@ -200,4 +223,89 @@
     transform: none;
     transition: none;
   }
+}
+
+/* ── Hero phrase slide animation ─────────────────────── */
+@keyframes hero-phrase-in {
+  0%   { opacity: 0; transform: translateY(10px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  85%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.hero-phrase {
+  animation: hero-phrase-in 3.5s ease-in-out forwards;
+}
+
+@keyframes hero-background-drift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+.hero-background-drift {
+  animation: hero-background-drift 6s ease-in-out both;
+}
+
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.8rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-copy-enter {
+  animation: hero-copy-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-word-enter {
+  animation: hero-copy-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes projects-ambient-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2rem, 1.5rem, 0) scale(1.12);
+  }
+}
+
+.projects-ambient {
+  animation: projects-ambient-drift 16s ease-in-out infinite;
+}
+
+.projects-ambient-accent {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+.projects-ambient-highlight {
+  animation-delay: -9s;
+  animation-duration: 18s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-background-drift,
+  .hero-copy-enter,
+  .hero-word-enter,
+  .projects-ambient {
+    animation: none;
+  }
+}
+
+/* ── Hero stats bar ──────────────────────────────────── */
+.hero-stat-bar {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
