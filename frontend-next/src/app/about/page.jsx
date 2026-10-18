@@ -13,9 +13,10 @@ export default function About() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-12">
             <div className="lg:col-span-8">
-              <span className="mb-4 inline-flex rounded-full bg-blue-100 px-3 py-2 text-sm font-medium text-blue-800">
-                About Us
-              </span>
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-lime-200 bg-[#ecfccb] px-4 py-1.5 text-sm font-semibold text-[#3f6212] shadow-sm">
+                <span className="text-lime-600" aria-hidden="true">✨</span>
+                <span>About ArtSonGroup</span>
+              </div>
               <h1 className="mb-5 text-4xl font-bold md:text-6xl">
                 Engineering the future of enterprise technology
               </h1>
@@ -49,9 +50,10 @@ export default function About() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <span className="mb-3 inline-flex rounded-full bg-blue-100 px-3 py-2 text-sm font-medium text-blue-800">
-                Our Story
-              </span>
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-lime-200 bg-[#ecfccb] px-4 py-1.5 text-sm font-semibold text-[#3f6212] shadow-sm">
+                <span className="text-lime-600" aria-hidden="true">✨</span>
+                <span>Our Story</span>
+              </div>
               <h2 className="mb-4 text-3xl font-bold text-navy md:text-4xl">
                 A decade of trusted delivery
               </h2>

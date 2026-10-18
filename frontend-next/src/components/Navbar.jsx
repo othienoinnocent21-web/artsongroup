@@ -6,17 +6,16 @@ import { usePathname } from 'next/navigation'
 
 const socialLinks = [
   { label: 'Facebook', icon: 'bi-facebook', href: 'https://www.facebook.com/' },
-  { label: 'X', icon: 'bi-twitter-x', href: 'https://x.com/' },
+  { label: 'X (Twitter)', icon: 'bi-twitter-x', href: 'https://x.com/' },
   { label: 'LinkedIn', icon: 'bi-linkedin', href: 'https://www.linkedin.com/' },
   { label: 'Pinterest', icon: 'bi-pinterest', href: 'https://www.pinterest.com/' },
 ]
 
-const navItems = [
-  { to: '/projects', label: 'Products' },
-  { to: '/services', label: 'Services' },
-  { to: '/opportunities', label: 'Opportunities' },
-  { to: '/blog', label: 'Blog' },
-  { to: '/contact', label: 'Contact' },
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Blog', path: '/blog' },
+  { name: 'Contact', path: '/contact' },
 ]
 
 const Navbar = () => {
@@ -24,158 +23,174 @@ const Navbar = () => {
   const [companyOpen, setCompanyOpen] = useState(false)
   const pathname = usePathname()
 
-  const close = () => {
+  const closeMenu = () => {
     setExpanded(false)
     setCompanyOpen(false)
   }
+  const companyActive = pathname === '/about' || pathname.startsWith('/projects')
 
   return (
-    <header className="relative z-20">
-      {/* Top utility bar */}
-      <div className="border-b border-slate-200 bg-slate-100 py-2 text-sm text-slate-600">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <span className="flex items-center gap-2">
-                <i className="bi bi-geo-alt text-green-600" aria-hidden="true"></i>
-                Kampala, Uganda
-              </span>
+    <header className="sticky top-0 z-50">
+      <div className="border-b border-slate-200/80 bg-slate-100 px-4 py-2 text-xs text-slate-600 sm:px-8">
+        <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <span className="flex items-center gap-2">
+              <i className="bi bi-geo-alt text-lime-600" aria-hidden="true" />
+              Kampala, Uganda
+            </span>
+            <a
+              href="mailto:info@artsongroup.com"
+              className="flex items-center gap-2 transition hover:text-lime-600"
+            >
+              <i className="bi bi-envelope text-lime-600" aria-hidden="true" />
+              info@artsongroup.com
+            </a>
+            <span className="flex items-center gap-2">
+              <i className="bi bi-clock text-lime-600" aria-hidden="true" />
+              9.00 am – 5.30 pm
+            </span>
+          </div>
+          <div className="flex items-center gap-4 text-sm text-slate-700">
+            {socialLinks.map((social) => (
               <a
-                className="flex items-center gap-2 no-underline hover:underline"
-                href="mailto:info@artsontechnologies.com"
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-lime-600"
+                aria-label={social.label}
               >
-                <i className="bi bi-envelope text-green-600" aria-hidden="true"></i>
-                info@artsontechnologies.com
+                <i className={`bi ${social.icon}`} aria-hidden="true" />
               </a>
-              <span className="flex items-center gap-2">
-                <i className="bi bi-clock text-green-600" aria-hidden="true"></i>
-                9.00 am – 5.30 pm
-              </span>
-            </div>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="no-underline hover:underline"
-                  aria-label={social.label}
-                >
-                  <i className={`bi ${social.icon}`} aria-hidden="true"></i>
-                </a>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Main nav */}
-      <nav className="bg-black py-4 text-white shadow-sm">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+      <nav
+        aria-label="Main navigation"
+        className="border-b border-slate-200/60 bg-white shadow-sm"
+      >
+        <div className="flex min-h-28 w-full flex-wrap items-center justify-between gap-3 px-4 sm:px-8 lg:px-12">
           <Link
-            className="flex items-center gap-2 text-xl font-bold no-underline hover:underline"
+            className="flex items-center no-underline"
             href="/"
-            onClick={close}
+            onClick={closeMenu}
+            aria-label="ArtSonGroup home"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-lime-500">
-              <i className="bi bi-cpu text-white" aria-hidden="true"></i>
+            <span className="flex items-center justify-center rounded-md bg-lime-500 p-1.5 text-white">
+              <i className="bi bi-cpu text-xl" aria-hidden="true" />
             </span>
-            <span className="font-bold text-xl text-white">ArtSonGroup</span>
+            <span className="ml-2 text-xl font-extrabold tracking-tight text-slate-900">
+              ArtSonGroup
+            </span>
           </Link>
 
-          <button
-            className="rounded-md border border-white/40 px-3 py-2 text-white transition hover:bg-white/10 lg:hidden"
-            type="button"
-            aria-expanded={expanded}
-            aria-controls="navbarMain"
-            aria-label="Toggle navigation"
-            onClick={() => setExpanded((c) => !c)}
-          >
-            <span className="bi bi-list text-xl" aria-hidden="true"></span>
-          </button>
+          <div className="flex items-center gap-3 lg:order-2">
+            <button
+              className="hidden text-lg text-slate-700 transition hover:text-lime-600 lg:inline-flex"
+              type="button"
+              aria-label="Search"
+            >
+              <i className="bi bi-search" aria-hidden="true" />
+            </button>
+            <button
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 text-slate-700 transition hover:bg-slate-50 hover:text-lime-600 lg:hidden"
+              type="button"
+              aria-expanded={expanded}
+              aria-controls="navbarMain"
+              aria-label={expanded ? 'Close navigation menu' : 'Open navigation menu'}
+              onClick={() => setExpanded((current) => !current)}
+            >
+              <i className={`bi ${expanded ? 'bi-x-lg' : 'bi-list'} text-xl`} aria-hidden="true" />
+            </button>
+          </div>
 
           <div
             id="navbarMain"
-            className={`${expanded ? 'flex' : 'hidden'} w-full flex-col gap-2 lg:flex lg:w-auto lg:flex-row lg:items-center`}
+            className={`${expanded ? 'flex' : 'hidden'} order-3 w-full flex-col border-t border-slate-100 pb-3 lg:order-1 lg:ml-auto lg:flex lg:w-auto lg:flex-row lg:items-center lg:gap-5 lg:border-0 lg:pb-0 xl:gap-6`}
           >
-            <ul className="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-2">
-              {/* Home */}
-              <li>
+            {navLinks.slice(0, 1).map((link) => {
+              const isActive = pathname === link.path
+
+              return (
                 <Link
-                  className={`rounded px-3 py-2 transition no-underline hover:underline ${
-                    pathname === '/' ? 'text-lime-400' : 'text-white hover:text-lime-400'
+                  key={link.name}
+                  className={`relative py-3 text-sm transition-colors lg:py-1 ${
+                    isActive
+                      ? 'border-b-2 border-lime-500 pb-1 font-bold text-lime-600'
+                      : 'font-semibold text-slate-800 hover:text-lime-600'
                   }`}
-                  href="/"
-                  onClick={close}
+                  href={link.path}
+                  onClick={closeMenu}
+                  aria-current={isActive ? 'page' : undefined}
                 >
-                  Home
+                  {link.name}
                 </Link>
-              </li>
+              )
+            })}
+            <div className="relative">
+              <button
+                type="button"
+                className={`flex w-full items-center gap-2 py-3 text-left text-sm transition-colors lg:w-auto lg:py-1 ${
+                  companyActive
+                    ? 'font-bold text-lime-600'
+                    : 'font-semibold text-slate-800 hover:text-lime-600'
+                }`}
+                aria-expanded={companyOpen}
+                aria-haspopup="true"
+                onClick={() => setCompanyOpen((current) => !current)}
+              >
+                Company
+                <i className="bi bi-chevron-down text-[10px]" aria-hidden="true" />
+              </button>
+              {companyOpen && (
+                <div className="z-30 mt-1 flex flex-col rounded-md border border-slate-200 bg-white py-1 shadow-lg lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:min-w-44">
+                  {[
+                    { name: 'About Us', path: '/about' },
+                    { name: 'Projects', path: '/projects' },
+                  ].map((item) => {
+                    const isActive =
+                      pathname === item.path || pathname.startsWith(`${item.path}/`)
 
-              {/* Company dropdown */}
-              <li className="relative">
-                <button
-                  className={`rounded px-3 py-2 transition ${
-                    pathname === '/about' ? 'text-lime-400' : 'text-white hover:text-lime-400'
+                    return (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        onClick={closeMenu}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={`px-4 py-2 text-sm transition-colors hover:bg-slate-50 hover:text-lime-600 ${
+                          isActive ? 'font-bold text-lime-600' : 'font-medium text-slate-800'
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+            {navLinks.slice(1).map((link) => {
+              const isActive =
+                pathname === link.path ||
+                (link.path !== '/' && pathname.startsWith(`${link.path}/`))
+
+              return (
+                <Link
+                  key={link.name}
+                  className={`relative py-3 text-sm transition-colors lg:py-1 ${
+                    isActive
+                      ? 'border-b-2 border-lime-500 pb-1 font-bold text-lime-600'
+                      : 'font-semibold text-slate-800 hover:text-lime-600'
                   }`}
-                  type="button"
-                  aria-expanded={companyOpen}
-                  onClick={() => setCompanyOpen((c) => !c)}
+                  href={link.path}
+                  onClick={closeMenu}
+                  aria-current={isActive ? 'page' : undefined}
                 >
-                  Company
-                </button>
-                <ul
-                  className={`${
-                    companyOpen ? 'block' : 'hidden'
-                  } absolute left-0 top-full z-30 min-w-44 rounded-md border border-slate-200 bg-white py-2 text-slate-800 shadow-lg`}
-                >
-                  <li>
-                    <Link
-                      className="block px-4 py-2 no-underline hover:bg-slate-100 hover:underline"
-                      href="/about"
-                      onClick={close}
-                    >
-                      About us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="block px-4 py-2 no-underline hover:bg-slate-100 hover:underline"
-                      href="/contact"
-                      onClick={close}
-                    >
-                      Get in touch
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-
-              {/* Dynamic nav items */}
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    className={`block rounded px-3 py-2 transition no-underline hover:underline ${
-                      pathname === item.to ? 'text-lime-400' : 'text-white hover:text-lime-400'
-                    }`}
-                    href={item.to}
-                    onClick={close}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-
-              <li className="lg:ml-2">
-                <button
-                  className="rounded p-2 text-white transition hover:text-lime-400"
-                  type="button"
-                  aria-label="Search"
-                >
-                  <i className="bi bi-search" aria-hidden="true"></i>
-                </button>
-              </li>
-            </ul>
+                  {link.name}
+                </Link>
+              )
+            })}
           </div>
         </div>
       </nav>

@@ -4,12 +4,12 @@ import Image from 'next/image'
 const ProjectCard = ({ title, category, description, tags = [], image, link = '/projects' }) => (
   <div className="h-full flex flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl">
     {/* Image Container */}
-    <div className="relative h-48 sm:h-52 w-full bg-slate-900/10 overflow-hidden rounded-t-2xl">
+    <div className="relative h-52 w-full bg-slate-900/10 overflow-hidden rounded-t-2xl group">
       <Image
         src={image}
         alt={title}
         fill
-        className="object-cover object-top hover:scale-105 transition duration-500"
+        className="object-cover object-top group-hover:scale-105 transition duration-500"
         sizes="(max-width: 768px) 100vw, 33vw"
       />
       <span className="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm z-10">
