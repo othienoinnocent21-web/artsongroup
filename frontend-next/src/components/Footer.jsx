@@ -33,7 +33,11 @@ export default function Footer() {
         </div>
         <div className="flex flex-col gap-1.5 pt-3 text-[10px] text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 ArtSonGroup. All rights reserved.</p>
-          <p>Software · Intelligence · Impact</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link href="/privacy-policy" className="transition hover:text-white">Privacy Policy</Link>
+            <Link href="/terms-and-conditions" className="transition hover:text-white">Terms and Conditions</Link>
+            <p>Software · Intelligence · Impact</p>
+          </div>
         </div>
       </div>
     </footer>

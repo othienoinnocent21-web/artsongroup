@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 import { articles } from '@/lib/articles'
 
 export async function generateStaticParams() {
@@ -13,7 +14,30 @@ export async function generateMetadata({ params }) {
   return article ? { title: `${article.title} | ArtSonGroup Blog`, description: article.excerpt } : {}
 }
 
-export default async function BlogDetail({ params }) {
+function BlogDetailFallback() {
+  return (
+    <article className="bg-white">
+      <header className="bg-[#092638] py-8 text-white sm:py-10">
+        <div className="mx-auto max-w-[960px] animate-pulse px-5 sm:px-8">
+          <div className="h-3 w-24 rounded bg-white/20" />
+          <div className="mt-6 h-3 w-40 rounded bg-white/20" />
+          <div className="mt-4 h-10 max-w-2xl rounded bg-white/20" />
+          <div className="mt-4 h-4 max-w-xl rounded bg-white/10" />
+        </div>
+      </header>
+      <div className="mx-auto max-w-[960px] animate-pulse px-5 py-8 sm:px-8 sm:py-10">
+        <div className="aspect-[2/1] rounded-xl bg-slate-100" />
+        <div className="mt-8 space-y-3">
+          <div className="h-4 rounded bg-slate-100" />
+          <div className="h-4 rounded bg-slate-100" />
+          <div className="h-4 w-4/5 rounded bg-slate-100" />
+        </div>
+      </div>
+    </article>
+  )
+}
+
+async function BlogDetailContent({ params }) {
   const { id } = await params
   const article = articles.find((item) => item.id === Number(id))
   if (!article) notFound()
@@ -50,5 +74,13 @@ export default async function BlogDetail({ params }) {
         </div>
       </div>
     </article>
+  )
+}
+
+export default function BlogDetail({ params }) {
+  return (
+    <Suspense fallback={<BlogDetailFallback />}>
+      <BlogDetailContent params={params} />
+    </Suspense>
   )
 }
