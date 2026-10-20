@@ -1,44 +1,14 @@
 import Link from 'next/link'
+import PageHero from '@/components/PageHero'
 
-export const metadata = {
-  title: 'Opportunities | ArtSonGroup',
-  description: 'Career openings, tenders, and partnership opportunities at ArtSonGroup.',
-}
+export const metadata = { title: 'Opportunities | ArtSonGroup', description: 'Careers and partnership opportunities at ArtSonGroup.' }
 
 export default function Opportunities() {
   return (
     <>
-      <section className="bg-gradient-to-br from-navy to-navy-dark py-16 text-white md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <span className="mb-4 inline-flex rounded-full bg-blue-100 px-3 py-2 text-sm font-medium text-blue-800">
-            Opportunities
-          </span>
-          <h1 className="mb-5 text-4xl font-bold md:text-6xl">Join ArtSonGroup</h1>
-          <p className="mx-auto max-w-2xl text-lg text-slate-200">
-            Explore career openings, tenders, and partnership opportunities with our growing team
-            across East Africa.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-lime-100 text-3xl text-lime-700">
-            <i className="bi bi-megaphone" aria-hidden="true"></i>
-          </div>
-          <h2 className="mb-4 text-2xl font-bold text-navy">No open positions right now</h2>
-          <p className="mb-8 max-w-xl mx-auto text-slate-600">
-            We are always looking for talented people. Send us your CV and we will reach out when a
-            suitable opportunity arises.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex rounded-lg bg-navy px-6 py-3 font-semibold text-white transition hover:bg-navy-dark no-underline hover:underline"
-          >
-            Get in touch
-          </Link>
-        </div>
-      </section>
+      <PageHero eyebrow="Opportunities" title="Do meaningful technology work with us." description="We bring together people who care about sound engineering, useful data, and technology that improves how institutions serve communities." />
+      <section className="bg-white py-10 sm:py-12"><div className="mx-auto grid max-w-[1240px] gap-7 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-10"><div><p className="section-kicker">Current openings</p><h2 className="text-2xl font-semibold tracking-tight text-[#0a2438]">No advertised roles at the moment.</h2><p className="mt-3 max-w-md text-sm leading-6 text-slate-600">We still welcome thoughtful introductions from engineers, analysts, implementation specialists, and potential partners.</p></div><div className="grid gap-3 sm:grid-cols-2">{[['bi-code-square', 'Technical talent', 'Software engineering, data, product, and platform expertise.'], ['bi-people', 'Delivery talent', 'Implementation, training, customer success, and program expertise.'], ['bi-diagram-3', 'Partners', 'Technology, research, implementation, and development collaboration.'], ['bi-lightbulb', 'Future opportunities', 'Share your profile for consideration when a relevant need opens.']].map(([icon, title, text]) => <div key={title} className="rounded-lg border border-slate-200 bg-[#f7f8f6] p-4"><i className={`bi ${icon} text-emerald-700`} /><h3 className="mt-2 text-sm font-semibold text-[#0a2438]">{title}</h3><p className="mt-1 text-xs leading-5 text-slate-600">{text}</p></div>)}</div></div></section>
+      <section className="border-t border-slate-200 bg-[#edf3ef] py-8"><div className="mx-auto flex max-w-[1240px] flex-col gap-4 px-5 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10"><div><h2 className="text-xl font-semibold text-[#0a2438]">Introduce yourself to our team.</h2><p className="mt-1 text-xs text-slate-600">Send a concise note about the work you want to do and the value you bring.</p></div><Link href="/contact" className="button-primary">Get in touch <i className="bi bi-arrow-up-right" /></Link></div></section>
     </>
   )
 }

@@ -4,9 +4,9 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'ArtSonGroup | Digital Innovation Across Africa',
+  title: 'ArtSonGroup | Software, Business Intelligence & Digital Health',
   description:
-    'ArtSonGroup empowers businesses across Africa with innovative cloud solutions, intelligent software, and actionable data analytics.',
+    'ArtSonGroup builds enterprise software, business intelligence, and digital health solutions, including eAFYA EMR for government hospitals in Uganda.',
   icons: { icon: '/favicon.svg' },
 }
 

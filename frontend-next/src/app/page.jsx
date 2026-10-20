@@ -1,638 +1,213 @@
-'use client'
-
-import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 
-const heroSlides = [
-  {
-    image: '/eafya-emr-portal.png',
-    alt: 'eAFYA EMR portal with national health system modules',
-  },
-  {
-    image: '/inno.jpeg',
-    alt: 'eAFYA clinical data mining dashboard',
-  },
-  {
-    image: '/othieno.jpeg',
-    alt: 'National health and analytics dashboard',
-  },
-]
-
-const aboutCards = [
-  {
-    title: 'Who We Are',
-    description:
-      'A health tech group helping institutions build information systems that are practical, trusted, and used for action.',
-    link: 'Meet ArtSonGroup',
-    href: '/about',
-  },
-  {
-    title: 'Why We Do This',
-    description:
-      'Decisions in health programmes depend on timely, reliable information. Our work helps teams move from reporting to response.',
-    link: 'See Our Work',
-    href: '/projects',
-  },
-  {
-    title: 'Our Story',
-    description:
-      'Our growth is rooted in public sector collaboration, EMR implementation experience, and long-term capacity building.',
-    link: 'Read our story',
-    href: '/about',
-  },
-]
-
-const problems = ['Delayed reporting', 'Fragmented data', 'Limited visibility', 'Slow decision-making']
-
-const solutions = [
-  'eAFYA EMR implementations',
-  'Interoperability & Data Mining',
-  'National Health Dashboards',
-  'Capacity strengthening',
-  'Clinical data innovation',
-]
-
-const approachItems = [
+const services = [
   {
     number: '01',
-    title: 'Implementation That Lasts',
+    icon: 'bi-code-slash',
+    title: 'Software Development',
     description:
-      'We build practical digital health systems that are usable in the field, governable at national level, and sustainable after deployment.',
+      'Purpose-built web, mobile, and enterprise platforms engineered around your operations, users, and long-term growth.',
+    capabilities: ['Enterprise applications', 'Systems integration', 'Product engineering'],
   },
   {
     number: '02',
-    title: 'Capacity Built Into Delivery',
+    icon: 'bi-bar-chart-line',
+    title: 'Business Intelligence',
     description:
-      'Training, mentoring, and operational support are designed into the work so local teams own the tools and the outcomes.',
+      'Data platforms and executive dashboards that turn fragmented operational information into decisions teams can act on.',
+    capabilities: ['Analytics dashboards', 'Data integration', 'Reporting automation'],
   },
   {
     number: '03',
-    title: 'Partnerships With Accountability',
+    icon: 'bi-heart-pulse',
+    title: 'Digital Health Solutions',
     description:
-      'Our work aligns government priorities, implementing partners, and technical teams around measurable public-sector results.',
+      'Secure health information systems designed for real clinical workflows, institutional ownership, and continuity of care.',
+    capabilities: ['Electronic medical records', 'Health analytics', 'Implementation support'],
   },
 ]
 
-const reasonsToWorkWithUs = [
-  {
-    icon: 'bi-building-check',
-    title: 'Grounded in public-sector delivery',
-    description:
-      'We work alongside ministries, health facilities, and implementation partners to fit systems to real workflows and priorities.',
-  },
-  {
-    icon: 'bi-diagram-3',
-    title: 'Connected health technology',
-    description:
-      'Our EMR, data mining, and dashboard capabilities help institutions connect routine clinical information to practical decisions.',
-  },
-  {
-    icon: 'bi-people',
-    title: 'Support that builds local ownership',
-    description:
-      'Capacity strengthening and ongoing collaboration help local teams confidently use and sustain the systems they rely on.',
-  },
-]
-
-const featuredSystems = [
-  {
-    image: '/eafya-emr-portal.png',
-    alt: 'eAFYA EMR portal system modules',
-    badge: 'SYSTEM PREVIEW',
-    title: 'eAFYA EMR Expands Across National Healthcare Facilities',
-  },
-  {
-    image: '/inno.jpeg',
-    alt: 'eAFYA Data Mining Tool',
-    badge: 'CLINICAL ANALYTICS',
-    title: 'eAFYA Data Mining Tool v1.6 Launched for Clinical Indicators',
-  },
-  {
-    image: '/othieno.jpeg',
-    alt: 'National Health and Analytics Dashboard',
-    badge: 'HEALTH INTELLIGENCE',
-    title: 'National Health & Analytics Dashboard Live Reporting',
-  },
+const deliverySteps = [
+  ['Discover', 'We map the operating environment, user needs, data flows, and the outcome the system must enable.'],
+  ['Design', 'We shape the architecture, experience, and delivery roadmap with stakeholders—not around them.'],
+  ['Deliver', 'We build, integrate, test, and deploy dependable technology with clear governance throughout.'],
+  ['Enable', 'We transfer knowledge, support adoption, and strengthen the teams that will sustain the solution.'],
 ]
 
 export default function Home() {
-  const [activeSlide, setActiveSlide] = useState(0)
-  const [organizationSlide, setOrganizationSlide] = useState(0)
-  const homeRef = useRef(null)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroSlides.length)
-    }, 6000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setOrganizationSlide((current) => (current + 1) % heroSlides.length)
-    }, 7000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const home = homeRef.current
-    if (!home) return
-
-    const animatedItems = home.querySelectorAll('[data-home-aos]')
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      animatedItems.forEach((item) => item.classList.add('is-visible'))
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -32px 0px' },
-    )
-
-    home.classList.add('home-animations-ready')
-    animatedItems.forEach((item) => observer.observe(item))
-
-    return () => {
-      observer.disconnect()
-      home.classList.remove('home-animations-ready')
-    }
-  }, [])
-
   return (
-    <div ref={homeRef} className="home-page">
-      <section
-        aria-label="ArtSonGroup introduction"
-        className="relative isolate flex min-h-[680px] items-center overflow-hidden bg-slate-900 sm:min-h-[720px]"
-      >
-        <div className="absolute inset-0 -z-10" aria-hidden="true">
-          {heroSlides.map((slide, index) => (
-            <div
-              key={slide.image}
-              role="img"
-              aria-label={slide.alt}
-              style={{ backgroundImage: `url("${slide.image}")` }}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 motion-reduce:transition-none ${
-                activeSlide === index
-                  ? 'opacity-100 hero-background-drift'
-                  : 'opacity-0'
-              }`}
-            />
-          ))}
-          <div className="absolute inset-0 bg-slate-950/45" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/65 via-slate-950/20 to-slate-950/25" />
-        </div>
-
-        <div className="mx-auto w-full max-w-7xl px-4 pb-32 pt-20 sm:px-6 lg:px-8">
-          <div className="max-w-3xl border-l-4 border-red-600 bg-white/90 p-6 shadow-2xl backdrop-blur-md sm:p-10 lg:p-12">
-            <p
-              key={`tagline-${activeSlide}`}
-              className="hero-copy-enter mb-5 text-xs font-bold uppercase tracking-[0.16em] text-red-700 sm:text-sm"
-            >
-              ARTSONGROUP <span className="px-1 text-slate-400">•</span> Collaboration{' '}
-              <span className="px-1 text-slate-400">•</span> Integration{' '}
-              <span className="px-1 text-slate-400">•</span> Excellence
-            </p>
-            <h1
-              key={`headline-${activeSlide}`}
-              className="mb-5 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-navy sm:text-5xl lg:text-6xl"
-              aria-label="Partnering for Better Health Outcomes"
-            >
-              {'Partnering for Better Health Outcomes'.split(' ').map((word, index) => (
-                <span
-                  key={`${activeSlide}-${word}-${index}`}
-                  aria-hidden="true"
-                  className="hero-word-enter inline-block"
-                  style={{ animationDelay: `${index * 70}ms` }}
-                >
-                  {word}{' '}
-                </span>
-              ))}
+    <div className="overflow-hidden bg-[#f7f8f6]">
+      <section className="relative isolate border-b border-slate-200 bg-[#f7f8f6]">
+        <div className="corporate-grid absolute inset-0 -z-20" aria-hidden="true" />
+        <div className="absolute -right-48 top-[-12rem] -z-10 h-[42rem] w-[42rem] rounded-full bg-emerald-100/70 blur-3xl" aria-hidden="true" />
+        <div className="mx-auto grid min-h-[460px] max-w-[1240px] items-center gap-9 px-5 py-9 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-10 lg:py-10">
+          <div className="max-w-2xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-900 shadow-sm backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+              Technology built for African institutions
+            </div>
+            <h1 className="max-w-3xl text-[clamp(2.2rem,4.2vw,3.5rem)] font-semibold leading-[1.03] tracking-[-0.045em] text-[#0a2438]">
+              Intelligence in every system.
+              <span className="mt-2 block text-emerald-700">Impact in every decision.</span>
             </h1>
-            <p
-              key={`description-${activeSlide}`}
-              className="hero-copy-enter mb-8 max-w-2xl text-base leading-relaxed text-slate-700 sm:text-lg"
-              style={{ animationDelay: '220ms' }}
-            >
-              Working alongside government ministries, implementing partners, and communities to
-              strengthen health systems through technology and strategic partnerships.
+            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
+              ArtSonGroup designs software and business intelligence solutions for organizations
+              solving complex, high-impact problems across Uganda and the region.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/projects#partners"
-                className="inline-flex items-center rounded-lg bg-white px-6 py-3 font-bold text-navy shadow-sm ring-1 ring-slate-300 transition hover:bg-slate-100"
-              >
-                View Our Partners <span className="ml-2" aria-hidden="true">→</span>
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+              <Link href="/contact" className="button-primary group">
+                Discuss your project
+                <i className="bi bi-arrow-up-right transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center rounded-lg border border-navy/50 px-6 py-3 font-bold text-navy transition hover:bg-navy hover:text-white"
-              >
-                Contact ArtSonGroup
+              <Link href="#eafya" className="button-secondary">
+                Explore eAFYA EMR
+                <i className="bi bi-arrow-down" aria-hidden="true" />
               </Link>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-300/80 pt-4 text-[11px] font-semibold text-slate-600">
+              <span className="flex items-center gap-2"><i className="bi bi-building-check text-emerald-700" /> Public-sector delivery</span>
+              <span className="flex items-center gap-2"><i className="bi bi-shield-check text-emerald-700" /> Enterprise discipline</span>
+              <span className="flex items-center gap-2"><i className="bi bi-geo-alt text-emerald-700" /> Kampala, Uganda</span>
+            </div>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-3xl lg:mr-0">
+            <div className="absolute -left-8 top-12 hidden w-44 rounded-xl border border-white/70 bg-white/90 p-4 shadow-xl backdrop-blur xl:block">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700"><i className="bi bi-hospital" /></span>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Flagship platform</p>
+              <p className="mt-1 text-sm font-bold text-[#0a2438]">eAFYA EMR</p>
+            </div>
+            <div className="overflow-hidden rounded-[1.4rem] border border-slate-200 bg-[#0a2438] p-2.5 shadow-[0_30px_80px_rgba(10,36,56,0.22)] sm:p-3">
+              <div className="flex items-center justify-between px-3 py-2 text-white/60">
+                <div className="flex gap-1.5" aria-hidden="true"><span className="h-2 w-2 rounded-full bg-white/30" /><span className="h-2 w-2 rounded-full bg-white/30" /><span className="h-2 w-2 rounded-full bg-emerald-400" /></div>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em]">Enterprise health platform</span>
+              </div>
+              <div className="relative aspect-[1.48/1] overflow-hidden rounded-xl bg-white">
+                <Image src="/eafya-emr-portal.png" alt="eAFYA electronic medical record platform interface" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover object-top" />
+              </div>
+            </div>
+            <div className="absolute -bottom-6 right-3 flex items-center gap-3 rounded-xl border border-emerald-100 bg-white px-4 py-3 shadow-xl sm:right-8">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600 text-white"><i className="bi bi-check2" /></span>
+              <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">In operation</p><p className="text-sm font-bold text-[#0a2438]">Uganda government hospitals</p></div>
             </div>
           </div>
         </div>
+      </section>
 
-        <aside className="absolute bottom-14 right-4 z-10 w-[min(25rem,calc(100%-2rem))] overflow-hidden rounded-xl bg-red-600 p-5 text-white shadow-2xl sm:bottom-10 sm:right-8 sm:p-6 lg:right-[max(2rem,calc((100vw-80rem)/2))]">
-          <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.15em] text-white/80">
-            Watch Our Latest Story
-          </p>
-          <p className="mb-0 text-sm font-semibold leading-relaxed sm:text-base">
-            <span className="font-extrabold">EXPLORE OUR FLAGSHIP EMR</span>
-            <span aria-hidden="true"> • </span>
-            eAFYA EMR &amp; Data Mining Engine active across national facilities.
-          </p>
-          <Link
-            href="/projects"
-            className="mt-3 inline-flex items-center font-bold text-white underline decoration-white/60 underline-offset-4 hover:decoration-white"
-          >
-            Explore our products <span className="ml-2" aria-hidden="true">→</span>
-          </Link>
-        </aside>
-
-        <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2 sm:bottom-6">
-          {heroSlides.map((slide, index) => (
-            <button
-              key={slide.image}
-              type="button"
-              aria-label={`Show hero image ${index + 1}`}
-              aria-pressed={activeSlide === index}
-              onClick={() => setActiveSlide(index)}
-              className={`h-2.5 rounded-full transition-all ${
-                activeSlide === index ? 'w-8 bg-white' : 'w-2.5 bg-white/60 hover:bg-white'
-              }`}
-            />
-          ))}
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-[1240px] flex-col gap-3 px-5 py-4 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-slate-400">Built for institutions where reliability matters</p>
+          <div className="flex flex-wrap gap-x-7 gap-y-3 text-sm font-semibold text-[#0a2438]">
+            <span>Government</span><span>Healthcare</span><span>Enterprise</span><span>Development partners</span>
+          </div>
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-8">
-          <div className="self-center border-l-4 border-blue-900 bg-slate-50 px-7 py-9 sm:px-10 sm:py-12">
-            <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.18em] text-red-600">
-              Who We Are
-            </p>
-            <h2 className="mb-5 text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
-              A health technology organization strengthening national health information systems
-              and clinical data use.
-            </h2>
-            <p className="mb-0 max-w-2xl text-lg leading-relaxed text-slate-600">
-              ArtSonGroup works across healthcare facilities, government agencies, and regional
-              referral hospitals to design, implement, and support sustainable digital health
-              platforms.
+      <section id="services" className="bg-white py-11 sm:py-14">
+        <div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-10">
+          <div className="mb-7 grid gap-4 lg:grid-cols-2 lg:items-end">
+            <div>
+              <p className="section-kicker">What we do</p>
+              <h2 className="section-title max-w-2xl">Technology that moves organizations forward.</h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-slate-600 lg:justify-self-end">
+              From core software to decision intelligence, we combine strategy, engineering, and
+              implementation to deliver systems people can trust and use.
             </p>
           </div>
-
-          <div className="grid gap-4">
-            {aboutCards.map((card) => (
-              <article
-                key={card.title}
-                className="rounded-xl border border-slate-200 border-l-4 border-l-blue-900 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-6"
-              >
-                <h3 className="mb-2 text-xl font-bold text-navy">{card.title}</h3>
-                <p className="mb-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-                  {card.description}
-                </p>
-                <Link href={card.href} className="font-bold text-blue-700 transition hover:text-blue-900">
-                  {card.link} <span aria-hidden="true">→</span>
-                </Link>
+          <div className="grid overflow-hidden rounded-2xl border border-slate-200 lg:grid-cols-3">
+            {services.map((service, index) => (
+              <article key={service.title} className={`group relative bg-white p-5 transition-colors hover:bg-[#f3f8f5] ${index ? 'border-t border-slate-200 lg:border-l lg:border-t-0' : ''}`}>
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0a2438] text-base text-white transition-transform group-hover:-translate-y-1"><i className={`bi ${service.icon}`} /></span>
+                  <span className="text-sm font-bold text-slate-300">{service.number}</span>
+                </div>
+                <h3 className="text-lg font-semibold tracking-tight text-[#0a2438]">{service.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{service.description}</p>
+                <ul className="mt-4 space-y-2 border-t border-slate-200 pt-4 text-xs font-semibold text-slate-700">
+                  {service.capabilities.map((item) => <li key={item} className="flex items-center gap-3"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />{item}</li>)}
+                </ul>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <span
-            className="mb-2 block text-xs font-bold uppercase tracking-wider text-blue-900"
-            data-home-aos="fade-up"
-          >
-            Our Approach
-          </span>
-          <div className="mb-12 grid grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:gap-8">
-            <h2
-              className="text-3xl font-black leading-tight text-slate-900 sm:text-4xl lg:col-span-6"
-              data-home-aos="fade-up"
-            >
-              Building Systems That Work
-            </h2>
-            <p
-              className="text-base leading-relaxed text-slate-600 lg:col-span-6"
-              data-home-aos="fade-up"
-              style={{ '--home-aos-delay': '100ms' }}
-            >
-              ArtSonGroup brings implementation depth, public-sector discipline, and technology
-              fluency together so information systems become part of how institutions actually
-              operate.
+      <section id="eafya" className="relative overflow-hidden bg-[#092638] py-8 text-white sm:py-10">
+        <div className="absolute inset-0 opacity-20 corporate-grid-dark" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-[1120px] items-center gap-8 px-5 sm:px-8 lg:grid-cols-[1fr_0.95fr] lg:px-10">
+          <div className="overflow-hidden rounded-xl border border-white/15 bg-white/[0.06] shadow-xl">
+            <div className="relative aspect-[1.62/1] overflow-hidden bg-white">
+              <Image src="/eafya-emr-portal.png" alt="eAFYA electronic medical record platform interface" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain object-center" />
+            </div>
+            <div className="flex items-start gap-3 border-t border-white/10 px-4 py-3">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-emerald-400/15 text-xs text-emerald-300"><i className="bi bi-activity" /></span>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-emerald-300">From care to intelligence</p>
+                <p className="mt-0.5 text-xs leading-5 text-white/65">Connected clinical workflows and operational data for stronger decisions.</p>
+              </div>
+            </div>
+          </div>
+          <div className="lg:pl-3">
+            <p className="section-kicker !text-emerald-300">Flagship product</p>
+            <h2 className="text-[clamp(1.8rem,3vw,2.4rem)] font-semibold leading-[1.05] tracking-[-0.035em]">eAFYA EMR</h2>
+            <p className="mt-2 text-sm leading-6 text-white/70">
+              A comprehensive electronic medical record platform rolled out in government hospitals
+              in Uganda, built to support connected care and stronger health-system intelligence.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {approachItems.map((item, index) => (
-              <article
-                key={item.number}
-                data-home-aos="fade-up"
-                style={{ '--home-aos-delay': `${index * 120}ms` }}
-                className="group rounded-2xl border border-t-4 border-slate-200/80 border-t-transparent bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-t-lime-500 hover:shadow-xl motion-reduce:transform-none motion-reduce:transition-none"
-              >
-                <span className="mb-4 block text-xl font-extrabold text-blue-900 transition group-hover:text-lime-600">
-                  {item.number}
-                </span>
-                <h3 className="mb-3 text-xl font-bold text-slate-900">{item.title}</h3>
-                <p className="mb-0 text-sm leading-relaxed text-slate-600">{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-gradient-to-br from-red-700 via-red-700 to-[#55225e] py-16 text-white md:py-24">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
-          <div className="relative mx-auto w-full max-w-xl pb-12 pr-8 sm:pb-14 sm:pr-12" data-home-aos="fade-up">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/20 bg-slate-950/30 shadow-2xl">
-              {heroSlides.map((slide, index) => (
-                <div
-                  key={`organization-main-${slide.image}`}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                    organizationSlide === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  aria-hidden={organizationSlide !== index}
-                >
-                  <Image
-                    src={slide.image}
-                    alt={organizationSlide === index ? slide.alt : ''}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className={`object-cover ${
-                      organizationSlide === index ? 'hero-background-drift' : ''
-                    }`}
-                  />
+            <div className="mt-4 grid gap-x-5 gap-y-1 sm:grid-cols-2">
+              {[
+                ['bi-person-vcard', 'Patient-centred records', 'Structured information that supports continuity across the care journey.'],
+                ['bi-diagram-3', 'Integrated operations', 'Clinical, administrative, and facility workflows in one connected environment.'],
+                ['bi-graph-up-arrow', 'Decision-ready data', 'Operational information transformed into reporting and practical insight.'],
+                ['bi-people', 'Adoption support', 'Implementation and capacity strengthening for teams using the system every day.'],
+              ].map(([icon, title, text]) => (
+                <div key={title} className="flex gap-2.5 border-t border-white/15 py-3">
+                  <i className={`bi ${icon} mt-0.5 shrink-0 text-sm text-emerald-300`} />
+                  <div>
+                    <h3 className="text-xs font-semibold">{title}</h3>
+                    <p className="mt-0.5 text-[11px] leading-4 text-white/55">{text}</p>
+                  </div>
                 </div>
               ))}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-transparent to-transparent" />
             </div>
+            <Link href="/projects" className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-emerald-300 transition hover:text-white">See the eAFYA platform <i className="bi bi-arrow-right" /></Link>
+          </div>
+        </div>
+      </section>
 
-            <div className="absolute bottom-0 left-0 z-10 w-[min(17rem,62%)] rounded-xl border border-slate-200/70 bg-white p-5 text-slate-900 shadow-xl sm:p-6">
-              <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.15em] text-slate-500">
-                Operational Focus
-              </p>
-              <p className="mb-0 text-lg font-bold leading-snug">
-                Data that moves from collection to action
-              </p>
+      <section className="bg-[#edf3ef] py-11 sm:py-14">
+        <div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-10">
+          <div className="grid gap-9 lg:grid-cols-[0.85fr_1.15fr]">
+            <div className="lg:sticky lg:top-36 lg:self-start">
+              <p className="section-kicker">How we work</p>
+              <h2 className="section-title">A delivery model built for lasting value.</h2>
+              <p className="mt-3 max-w-md text-sm leading-6 text-slate-600">Good technology is only useful when it fits the institution, earns user trust, and can be sustained long after launch.</p>
+              <Link href="/about" className="mt-5 inline-flex items-center gap-3 text-sm font-bold text-emerald-800">About ArtSonGroup <i className="bi bi-arrow-right" /></Link>
             </div>
-
-            <div className="absolute bottom-3 right-0 z-10 h-32 w-[48%] overflow-hidden rounded-xl border-4 border-white bg-slate-900 shadow-2xl sm:h-44">
-              <Image
-                key={`organization-inset-${(organizationSlide + 1) % heroSlides.length}`}
-                src={heroSlides[(organizationSlide + 1) % heroSlides.length].image}
-                alt={heroSlides[(organizationSlide + 1) % heroSlides.length].alt}
-                fill
-                sizes="(max-width: 1024px) 48vw, 24vw"
-                className="object-cover hero-background-drift"
-              />
-            </div>
-
-            <div className="absolute -bottom-1 right-2 z-20 flex gap-2 rounded-full bg-slate-950/50 px-3 py-2 backdrop-blur-sm sm:right-6">
-              {heroSlides.map((slide, index) => (
-                <button
-                  key={`organization-dot-${slide.image}`}
-                  type="button"
-                  aria-label={`Show organization image ${index + 1}`}
-                  aria-pressed={organizationSlide === index}
-                  onClick={() => setOrganizationSlide(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    organizationSlide === index ? 'w-6 bg-white' : 'w-2 bg-white/60'
-                  }`}
-                />
+            <div className="divide-y divide-slate-300 border-y border-slate-300">
+              {deliverySteps.map(([title, text], index) => (
+                <article key={title} className="grid gap-3 py-5 sm:grid-cols-[3rem_0.7fr_1.3fr] sm:items-start">
+                  <span className="text-sm font-bold text-emerald-700">0{index + 1}</span>
+                  <h3 className="text-lg font-semibold tracking-tight text-[#0a2438]">{title}</h3>
+                  <p className="text-sm leading-6 text-slate-600">{text}</p>
+                </article>
               ))}
             </div>
           </div>
-
-          <div className="py-4">
-            <p
-              key={`organization-label-${organizationSlide}`}
-              className="hero-copy-enter mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-white/80 sm:text-sm"
-            >
-              Why Organizations Work With Us
-            </p>
-            <h2
-              key={`organization-heading-${organizationSlide}`}
-              className="mb-5 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl"
-            >
-              {'Clear strategy, grounded execution, and stronger institutional ownership.'
-                .split(' ')
-                .map((word, index) => (
-                  <span
-                    key={`${organizationSlide}-${word}-${index}`}
-                    className="hero-word-enter inline-block"
-                    style={{ animationDelay: `${index * 65}ms` }}
-                  >
-                    {word}{' '}
-                  </span>
-                ))}
-            </h2>
-            <p
-              key={`organization-description-${organizationSlide}`}
-              className="hero-copy-enter mb-5 text-base leading-relaxed text-white/85"
-              style={{ animationDelay: '120ms' }}
-            >
-              Our role is not just to introduce tools. We help institutions adopt better ways of
-              collecting, governing, interpreting, and acting on information across programmes and
-              teams.
-            </p>
-            <p className="mb-6 text-base leading-relaxed text-white/85">
-              That means balancing innovation with operational reality: technical architecture,
-              training, support, governance, and reporting all have to work together.
-            </p>
-            <ul className="grid gap-4">
-              {reasonsToWorkWithUs.map((reason, index) => (
-                <li
-                  key={reason.title}
-                  data-home-aos="fade-up"
-                  style={{ '--home-aos-delay': `${index * 100}ms` }}
-                  className="flex items-start gap-3 text-white/95"
-                >
-                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/15 text-xs text-white">
-                    <i className={`bi ${reason.icon}`} aria-hidden="true" />
-                  </span>
-                  <span>
-                    <strong className="font-bold">{reason.title}</strong>
-                    <span className="block text-sm leading-relaxed text-white/75">
-                      {reason.description}
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16 md:py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-2">
-            <article className="rounded-2xl border border-slate-200 bg-white px-7 py-9 text-center shadow-sm sm:px-10">
-              <span className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-2xl text-blue-800">
-                <i className="bi bi-eye" aria-hidden="true" />
-              </span>
-              <h2 className="mb-2 text-2xl font-bold text-navy">Our Vision</h2>
-              <p className="mb-0 text-slate-600">
-                Sustainable health information systems for action.
-              </p>
-            </article>
-            <article className="rounded-2xl border border-slate-200 bg-white px-7 py-9 text-center shadow-sm sm:px-10">
-              <span className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-red-50 text-2xl text-red-700">
-                <i className="bi bi-clock" aria-hidden="true" />
-              </span>
-              <h2 className="mb-2 text-2xl font-bold text-navy">Our Mission</h2>
-              <p className="mb-0 text-slate-600">
-                We design, implement, and promote integrated digital health platforms across
-                national and regional health systems.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gradient-to-r from-blue-50/70 to-pink-50/70 py-16 md:py-24">
-        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-red-600">
-            Partner Testimonials
-          </p>
-          <h2 className="mb-10 text-3xl font-extrabold text-navy sm:text-4xl">
-            What partners say about working with ArtSonGroup.
-          </h2>
-          <figure className="mx-auto max-w-4xl">
-            <blockquote className="font-serif text-2xl font-bold leading-relaxed text-navy sm:text-3xl lg:text-4xl">
-              “The collaboration helped our clinical teams move from routine reporting to practical
-              data use for programme decisions.”
-            </blockquote>
-            <figcaption className="mt-7 text-sm font-semibold text-slate-600 sm:text-base">
-              Regional Referral Hospital Lead / MoH Implementation Partner
-            </figcaption>
-          </figure>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <span className="rounded-full border border-blue-200 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-wide text-blue-900 sm:text-sm">
-              Regional Referral Hospital
-            </span>
-            <span className="rounded-full border border-red-200 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-wide text-red-800 sm:text-sm">
-              MoH Implementation Partner
-            </span>
-          </div>
-          <div className="mt-8 flex justify-center gap-2" aria-label="Testimonial slide indicator">
-            <span className="h-2.5 w-8 rounded-full bg-blue-900" aria-current="true" />
-            <span className="h-2.5 w-2.5 rounded-full bg-blue-900/20" />
-            <span className="h-2.5 w-2.5 rounded-full bg-blue-900/20" />
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto mb-10 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-red-600">
-              Why We Do This
-            </p>
-            <h2 className="text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
-              Turning data into measurable outcomes.
-            </h2>
-          </div>
-          <div className="grid gap-6 lg:grid-cols-2">
-            <article className="rounded-2xl border border-slate-200 border-t-4 border-t-red-600 bg-white p-7 shadow-sm sm:p-9">
-              <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.15em] text-red-700">
-                The Problem
-              </p>
-              <h3 className="mb-6 text-2xl font-bold leading-snug text-navy">
-                Many health systems still struggle to see and use data when it matters.
-              </h3>
-              <ul className="mb-0 grid gap-3 text-slate-700 sm:grid-cols-2">
-                {problems.map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-red-600" aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-            <article className="rounded-2xl border border-slate-200 border-t-4 border-t-blue-900 bg-white p-7 shadow-sm sm:p-9">
-              <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.15em] text-blue-800">
-                What We Design and Support
-              </p>
-              <h3 className="mb-6 text-2xl font-bold leading-snug text-navy">
-                Practical systems that help teams report, connect, analyze, and act.
-              </h3>
-              <ul className="mb-0 grid gap-3 text-slate-700 sm:grid-cols-2">
-                {solutions.map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-blue-800" aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-slate-50 py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+      <section className="bg-white px-5 py-9 sm:px-8 sm:py-11 lg:px-10">
+        <div className="relative mx-auto max-w-[1160px] overflow-hidden rounded-xl bg-emerald-700 px-6 py-7 text-white sm:px-8">
+          <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full border-[70px] border-white/5" aria-hidden="true" />
+          <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-red-600">
-                Latest News
-              </p>
-              <h2 className="max-w-3xl text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
-                Stay updated with our recent activities and achievements
-              </h2>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-100">Build with us</p>
+              <h2 className="mt-2 max-w-3xl text-2xl font-semibold leading-tight tracking-[-0.03em] sm:text-3xl">Let’s turn your most important challenge into a system that works.</h2>
             </div>
-            <Link
-              href="/projects"
-              className="inline-flex shrink-0 items-center font-bold text-blue-800 hover:text-blue-950"
-            >
-              View all products <span className="ml-2" aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredSystems.map((system) => (
-              <article
-                key={system.title}
-                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
-              >
-                <Link href="/projects" className="block">
-                  <div className="relative h-56 overflow-hidden bg-slate-200">
-                    <Image
-                      src={system.image}
-                      alt={system.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                    <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-extrabold tracking-wide text-red-700 shadow-sm">
-                      {system.badge}
-                    </span>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="mb-4 text-xl font-bold leading-snug text-navy">{system.title}</h3>
-                    <span className="inline-flex items-center font-bold text-blue-800">
-                      Explore system <span className="ml-2" aria-hidden="true">→</span>
-                    </span>
-                  </div>
-                </Link>
-              </article>
-            ))}
+            <Link href="/contact" className="inline-flex min-h-11 items-center justify-center gap-3 rounded-lg bg-white px-5 text-sm font-bold text-emerald-800 transition hover:bg-[#0a2438] hover:text-white">Start a conversation <i className="bi bi-arrow-up-right" /></Link>
           </div>
         </div>
       </section>

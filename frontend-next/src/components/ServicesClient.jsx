@@ -1,190 +1,34 @@
-'use client'
-
-import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import ServiceCard from '@/components/ServiceCard'
+import PageHero from '@/components/PageHero'
 
 const services = [
-  {
-    icon: 'bi-code-slash',
-    title: 'Custom Web Development',
-    desc: 'Modern, responsive web applications built with React, Node, and cloud-native stacks.',
-    features: ['React & Next.js', 'TypeScript', 'Responsive design', 'Performance tuning'],
-  },
-  {
-    icon: 'bi-cloud',
-    title: 'Cloud Solutions',
-    desc: 'Migrate, architect, and optimize infrastructure on AWS, Azure, and GCP.',
-    features: ['IaC with Terraform', 'Serverless architecture', 'Cost optimization', '99.9% uptime'],
-  },
-  {
-    icon: 'bi-brain',
-    title: 'AI & Data Engineering',
-    desc: 'Turn data into decisions with ML models, pipelines, and intelligent automation.',
-    features: ['Predictive analytics', 'Data pipelines', 'LLM integrations', 'MLOps'],
-  },
-  {
-    icon: 'bi-shield-check',
-    title: 'Cybersecurity',
-    desc: 'Hardening, penetration testing, and continuous security monitoring.',
-    features: ['Vulnerability scanning', 'Zero-trust design', 'Compliance audits', 'SOC 2'],
-  },
-  {
-    icon: 'bi-phone',
-    title: 'Mobile Development',
-    desc: 'Cross-platform iOS and Android apps with a single codebase.',
-    features: ['React Native', 'Flutter', 'Offline-first', 'App store deployment'],
-  },
-  {
-    icon: 'bi-cogs',
-    title: 'DevOps & SRE',
-    desc: 'Automated CI/CD, observability, and incident response for modern teams.',
-    features: ['GitHub Actions', 'Kubernetes', 'Monitoring dashboards', 'SLA support'],
-  },
+  ['bi-code-slash', 'Software development', 'Web, mobile, and enterprise software built around demanding institutional workflows.', ['Product engineering', 'Enterprise applications', 'API and systems integration']],
+  ['bi-bar-chart-line', 'Business intelligence', 'Connected data, reporting, and dashboards that make performance visible and actionable.', ['Executive dashboards', 'Data pipelines', 'Reporting automation']],
+  ['bi-heart-pulse', 'Digital health', 'Health information platforms that support care delivery, reporting, and operational oversight.', ['Electronic medical records', 'Clinical analytics', 'Health systems integration']],
+  ['bi-diagram-3', 'Systems integration', 'Practical interoperability between platforms, teams, and sources of operational data.', ['API architecture', 'Legacy integration', 'Data exchange']],
+  ['bi-people', 'Implementation & adoption', 'Structured rollout, training, and support that help technology become part of daily work.', ['Deployment planning', 'User training', 'Change support']],
+  ['bi-headset', 'Managed support', 'Responsive technical partnership for systems that need to remain dependable over time.', ['Application support', 'Monitoring', 'Continuous improvement']],
 ]
 
 export default function ServicesClient() {
-  const servicesPageRef = useRef(null)
-
-  useEffect(() => {
-    const page = servicesPageRef.current
-    if (!page) return
-
-    const animatedItems = page.querySelectorAll('[data-aos]')
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      animatedItems.forEach((item) => item.classList.add('is-visible'))
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -32px 0px' }
-    )
-
-    page.classList.add('services-animations-ready')
-    animatedItems.forEach((item) => observer.observe(item))
-
-    return () => {
-      observer.disconnect()
-      page.classList.remove('services-animations-ready')
-    }
-  }, [])
-
   return (
-    <div className="services-page" ref={servicesPageRef}>
-      <section className="bg-gradient-to-br from-navy to-navy-dark py-16 text-white md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <span
-            className="mb-4 inline-flex rounded-full bg-blue-100 px-3 py-2 text-sm font-medium text-blue-800"
-            data-aos="fade-down"
-          >
-            Services
-          </span>
-          <h1
-            className="mb-5 text-4xl font-bold md:text-6xl"
-            data-aos="fade-down"
-            data-aos-delay="100"
-          >
-            Capabilities engineered for scale
-          </h1>
-          <p
-            className="mb-0 max-w-2xl text-lg text-slate-200"
-            data-aos="fade-down"
-            data-aos-delay="200"
-          >
-            From strategy to deployment, we offer the full stack of technology services your
-            organization needs to compete.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <span
-              className="mb-3 inline-flex rounded-full bg-blue-100 px-3 py-2 text-sm font-medium text-blue-800"
-              data-aos="fade-down"
-            >
-              What we do
-            </span>
-            <h2
-              className="mb-3 text-3xl font-bold text-navy md:text-4xl"
-              data-aos="fade-down"
-              data-aos-delay="100"
-            >
-              A complete technology partner
-            </h2>
-            <p className="mb-0 max-w-2xl text-slate-600" data-aos="fade-down" data-aos-delay="200">
-              End-to-end services spanning strategy, design, engineering, and support.
-            </p>
-          </div>
-          <div className="grid gap-6 lg:grid-cols-2">
-            {services.map((s, index) => (
-              <div
-                className="min-w-0"
-                key={s.title}
-                data-aos="fade-up"
-                data-aos-delay={(index + 1) * 100}
-              >
-                <ServiceCard {...s} />
-              </div>
-            ))}
+    <>
+      <PageHero eyebrow="Our capabilities" title="Strategy, engineering, and delivery in one team." description="We design, build, connect, and support technology for organizations that need clear outcomes—not more complexity.">
+        <Link href="/contact" className="button-primary">Discuss a requirement <i className="bi bi-arrow-up-right" /></Link>
+      </PageHero>
+      <section className="bg-white py-10 sm:py-12">
+        <div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-10">
+          <div className="grid overflow-hidden rounded-xl border border-slate-200 md:grid-cols-2 lg:grid-cols-3">
+            {services.map(([icon, title, text, features], index) => <article key={title} className={`p-5 transition hover:bg-[#f3f8f5] ${index > 0 ? 'border-t border-slate-200 md:border-l' : ''} ${index === 2 ? 'md:border-l-0 lg:border-l' : ''} ${index === 3 ? 'lg:border-l-0' : ''}`}><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0a2438] text-sm text-white"><i className={`bi ${icon}`} /></span><h2 className="mt-3 text-lg font-semibold tracking-tight text-[#0a2438]">{title}</h2><p className="mt-1 text-sm leading-5 text-slate-600">{text}</p><ul className="mt-3 space-y-1.5 border-t border-slate-200 pt-3 text-xs font-semibold text-slate-600">{features.map((feature) => <li key={feature} className="flex gap-2"><i className="bi bi-check2 text-emerald-700" />{feature}</li>)}</ul></article>)}
           </div>
         </div>
       </section>
-
-      <section className="bg-slate-50 py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <span className="mb-3 inline-flex rounded-full bg-blue-100 px-3 py-2 text-sm font-medium text-blue-800">
-                Process
-              </span>
-              <h2 className="mb-3 text-3xl font-bold text-navy md:text-4xl">How we work</h2>
-              <p className="mb-8 text-slate-600">
-                A transparent, milestone-driven approach from discovery to launch.
-              </p>
-              {[
-                { n: '01', t: 'Discovery', d: 'We map goals, constraints, and success metrics.' },
-                { n: '02', t: 'Architecture', d: 'Cloud-native design reviewed by senior architects.' },
-                { n: '03', t: 'Build', d: 'Iterative delivery with continuous integration and review.' },
-                { n: '04', t: 'Launch & Scale', d: 'Deploy, monitor, and scale with 24/7 support.' },
-              ].map((step) => (
-                <div key={step.n} className="mb-5 flex gap-4">
-                  <span className="text-2xl font-bold text-accent">{step.n}</span>
-                  <div>
-                    <h3 className="mb-1 font-bold text-navy">{step.t}</h3>
-                    <p className="mb-0 text-sm text-slate-600">{step.d}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div>
-              <div className="rounded-2xl bg-navy p-8 text-white shadow-lg">
-                <h3 className="mb-3 text-2xl font-bold">Ready to transform?</h3>
-                <p className="mb-6 text-slate-200">
-                  Tell us about your challenge and we will get back within one business day.
-                </p>
-                <Link
-                  href="/contact"
-                  className="inline-flex rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 no-underline hover:underline"
-                >
-                  Schedule a consultation
-                </Link>
-              </div>
-            </div>
-          </div>
+      <section className="border-y border-slate-200 bg-[#edf3ef] py-9 sm:py-10">
+        <div className="mx-auto grid max-w-[1240px] gap-8 px-5 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-10">
+          <div><p className="section-kicker">Delivery model</p><h2 className="text-2xl font-semibold tracking-tight text-[#0a2438]">Clear from first question to long-term support.</h2></div>
+          <div className="grid gap-px overflow-hidden rounded-xl bg-slate-200 sm:grid-cols-2">{[['01', 'Discover', 'Clarify users, operations, data, risk, and success.'], ['02', 'Design', 'Shape the experience and technical architecture.'], ['03', 'Deliver', 'Build, test, integrate, and deploy in stages.'], ['04', 'Enable', 'Train teams, support adoption, and improve.']].map(([n, title, text]) => <div key={n} className="bg-white p-4"><span className="text-[10px] font-bold text-emerald-700">{n}</span><h3 className="mt-1 text-sm font-semibold text-[#0a2438]">{title}</h3><p className="mt-1 text-xs leading-5 text-slate-600">{text}</p></div>)}</div>
         </div>
       </section>
-    </div>
+    </>
   )
 }

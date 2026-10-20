@@ -1,9 +1,9 @@
 import BlogClient from '@/components/BlogClient'
 
 export const metadata = {
-  title: 'News & Blog | ArtSonGroup',
+  title: 'Blog | ArtSonGroup',
   description:
-    'Insights, product updates, and stories behind our digital health solutions powering organizations across East Africa.',
+    'Articles, product updates, and stories from ArtSonGroup and the eAFYA team.',
 }
 
 export default function BlogPage() {

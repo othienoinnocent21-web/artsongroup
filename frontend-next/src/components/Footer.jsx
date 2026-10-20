@@ -1,126 +1,41 @@
 import Link from 'next/link'
 
-const companyLinks = [
-  { label: 'About', to: '/about' },
-  { label: 'Services', to: '/services' },
-  { label: 'Projects', to: '/projects' },
-  { label: 'Contact', to: '/contact' },
-]
+const company = [['About us', '/about'], ['Services', '/services'], ['Our work', '/projects'], ['Blog', '/blog']]
+const solutions = [['Software development', '/services'], ['Business intelligence', '/services'], ['eAFYA EMR', '/projects'], ['Implementation support', '/services']]
 
-const serviceLinks = [
-  { label: 'Web Development', to: '/services' },
-  { label: 'Cloud Solutions', to: '/services' },
-  { label: 'AI & Data', to: '/services' },
-  { label: 'Cybersecurity', to: '/services' },
-]
-
-const socials = [
-  { icon: 'bi-linkedin', href: '#' },
-  { icon: 'bi-twitter-x', href: '#' },
-  { icon: 'bi-facebook', href: '#' },
-  { icon: 'bi-instagram', href: '#' },
-]
-
-const Footer = () => (
-  <footer className="bg-gradient-to-b from-navy-dark to-slate-950 py-12 text-white">
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-        {/* Brand */}
-        <div>
-          <Link href="/" className="mb-3 flex items-center gap-2 no-underline hover:underline">
-            <i className="bi bi-cpu text-2xl text-accent"></i>
-            <span className="text-xl font-bold">ArtSonGroup</span>
-          </Link>
-          <p className="mb-0 max-w-sm text-slate-400">
-            ArtSonGroup delivers enterprise-grade software, cloud, and digital transformation
-            solutions that power modern businesses worldwide.
-          </p>
-        </div>
-
-        {/* Company links */}
-        <div>
-          <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-accent">Company</h2>
-          <ul className="flex flex-col gap-2">
-            {companyLinks.map((l) => (
-              <li key={l.label}>
-                <Link
-                  className="text-slate-400 no-underline transition hover:text-white hover:underline"
-                  href={l.to}
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Service links */}
-        <div>
-          <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-accent">Services</h2>
-          <ul className="flex flex-col gap-2">
-            {serviceLinks.map((l) => (
-              <li key={l.label}>
-                <Link
-                  className="text-slate-400 no-underline transition hover:text-white hover:underline"
-                  href={l.to}
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Contact & socials */}
-        <div>
-          <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-accent">Contact</h2>
-          <ul className="mb-6 flex flex-col gap-2">
-            <li className="flex items-start gap-2">
-              <i className="bi bi-envelope mt-1 text-accent"></i>
-              <span className="text-slate-400">hello@arston.tech</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <i className="bi bi-telephone mt-1 text-accent"></i>
-              <span className="text-slate-400">+256 7946 0958</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <i className="bi bi-geo-alt mt-1 text-accent"></i>
-              <span className="text-slate-400">Kampala, Uganda</span>
-            </li>
-          </ul>
-          <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-accent">Follow</h2>
-          <div className="flex gap-3">
-            {socials.map((s) => (
-              <a
-                key={s.icon}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-slate-400 transition hover:-translate-y-0.5 hover:bg-blue-500/25 hover:text-white no-underline hover:underline"
-                aria-label={s.icon}
-              >
-                <i className={`bi ${s.icon} fs-5`}></i>
-              </a>
-            ))}
+export default function Footer() {
+  return (
+    <footer className="bg-[#071d2b] text-white">
+      <div className="mx-auto max-w-[1240px] px-5 py-5 sm:px-8 lg:px-10 lg:py-6">
+        <div className="grid gap-5 border-b border-white/10 pb-5 md:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.8fr_1fr]">
+          <div>
+            <Link href="/" className="flex items-center gap-3">
+              <span className="brand-mark !bg-emerald-500" aria-hidden="true"><span>A</span></span>
+              <span className="text-base font-semibold tracking-tight">ArtSonGroup</span>
+            </Link>
+            <p className="mt-2 max-w-xs text-[11px] leading-4 text-white/55">Dependable software, business intelligence, and digital health systems for institutions across Uganda and the region.</p>
+          </div>
+          <div>
+            <h2 className="footer-heading">Company</h2>
+            <ul className="mt-2 space-y-1">{company.map(([label, href]) => <li key={label}><Link href={href} className="footer-link">{label}</Link></li>)}</ul>
+          </div>
+          <div>
+            <h2 className="footer-heading">Solutions</h2>
+            <ul className="mt-2 space-y-1">{solutions.map(([label, href]) => <li key={label}><Link href={href} className="footer-link">{label}</Link></li>)}</ul>
+          </div>
+          <div>
+            <h2 className="footer-heading">Start a conversation</h2>
+            <a href="mailto:info@artsongroup.com" className="mt-2 block text-xs font-semibold text-white hover:text-emerald-300">info@artsongroup.com</a>
+            <a href="tel:+25679460958" className="mt-1 block text-xs text-white/60 hover:text-white">+256 794 609 58</a>
+            <p className="mt-1 text-xs text-white/60">Kampala, Uganda</p>
+            <Link href="/contact" className="mt-2 inline-flex items-center gap-1.5 border-b border-emerald-400 pb-0.5 text-[11px] font-bold text-emerald-300">Contact our team <i className="bi bi-arrow-up-right" /></Link>
           </div>
         </div>
+        <div className="flex flex-col gap-1.5 pt-3 text-[10px] text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 ArtSonGroup. All rights reserved.</p>
+          <p>Software · Intelligence · Impact</p>
+        </div>
       </div>
-
-      {/* Bottom bar */}
-      <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 py-4 sm:flex-row">
-        <Link
-          href="/admin"
-          className="flex items-center gap-2 text-sm text-slate-400 transition hover:text-white no-underline hover:underline"
-        >
-          <i className="bi bi-speedometer2" aria-hidden="true"></i>
-          Admin Dashboard
-        </Link>
-        <small className="text-center text-sm text-slate-400 sm:text-right">
-          &copy; 2026 ArtSonGroup. All rights reserved.
-        </small>
-      </div>
-    </div>
-  </footer>
-)
-
-export default Footer
+    </footer>
+  )
+}

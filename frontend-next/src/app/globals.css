@@ -17,10 +17,11 @@
   body {
     min-width: 320px;
     margin: 0;
-    background: #fff;
+    background: #f7f8f6;
     color: #1a2332;
-    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: Inter, Aptos, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
   button,
@@ -37,6 +38,172 @@
 
   a:hover {
     text-decoration: none !important;
+  }
+}
+
+@layer components {
+  .brand-mark {
+    position: relative;
+    display: inline-flex;
+    height: 2.25rem;
+    width: 2.25rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.7rem;
+    background: #0a2438;
+    color: white;
+    font-size: 1rem;
+    font-weight: 800;
+    box-shadow: inset -0.55rem 0 0 #16805c;
+  }
+
+  .brand-mark::after {
+    position: absolute;
+    right: 0.36rem;
+    bottom: 0.36rem;
+    height: 0.32rem;
+    width: 0.32rem;
+    border-radius: 999px;
+    background: #a7f3d0;
+    content: '';
+  }
+
+  .brand-mark span {
+    transform: translateX(-0.2rem);
+  }
+
+  .nav-link {
+    position: relative;
+    padding-block: 1.05rem;
+    color: #52606c;
+    font-size: 0.875rem;
+    font-weight: 650;
+    transition: color 180ms ease;
+  }
+
+  .nav-link::after {
+    position: absolute;
+    right: 0;
+    bottom: 0.5rem;
+    left: 0;
+    height: 2px;
+    background: #16805c;
+    content: '';
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 180ms ease;
+  }
+
+  .nav-link:hover,
+  .nav-link-active {
+    color: #0a2438;
+  }
+
+  .nav-link:hover::after,
+  .nav-link-active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .button-primary,
+  .button-secondary {
+    display: inline-flex;
+    min-height: 2.65rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 0.6rem;
+    padding-inline: 1.15rem;
+    font-size: 0.78rem;
+    font-weight: 750;
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .button-primary {
+    background: #0a2438;
+    color: white;
+  }
+
+  .button-primary:hover {
+    background: #16805c;
+    transform: translateY(-1px);
+  }
+
+  .button-secondary {
+    border: 1px solid #cbd5e1;
+    background: rgba(255, 255, 255, 0.72);
+    color: #0a2438;
+  }
+
+  .button-secondary:hover {
+    border-color: #0a2438;
+    background: white;
+  }
+
+  .section-kicker {
+    margin-bottom: 0.65rem;
+    color: #147052;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    color: #0a2438;
+    font-size: clamp(1.85rem, 3vw, 2.65rem);
+    font-weight: 650;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+
+  .footer-heading {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .footer-link {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.72rem;
+    transition: color 160ms ease;
+  }
+
+  .footer-link:hover {
+    color: white;
+  }
+}
+
+.page-kicker {
+  margin-bottom: 0.55rem;
+  color: #147052;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.corporate-grid {
+  background-image: linear-gradient(rgba(10, 36, 56, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 36, 56, 0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to right, black, transparent 80%);
+}
+
+.corporate-grid-dark {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom right, black, transparent 72%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
   }
 }
 
