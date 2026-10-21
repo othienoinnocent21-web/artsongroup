@@ -21,21 +21,6 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/90 bg-white/95 backdrop-blur-xl">
-      <div className="border-b border-slate-100 bg-white">
-        <div className="mx-auto flex min-h-9 max-w-[1240px] items-center justify-between gap-4 px-5 text-[10px] text-slate-500 sm:px-8 lg:px-10">
-          <div className="flex min-w-0 items-center gap-4 sm:gap-6">
-            <span className="hidden items-center gap-1.5 sm:inline-flex"><i className="bi bi-geo-alt-fill text-emerald-600" aria-hidden="true" />Kampala, Uganda</span>
-            <a href="mailto:info@artsongroup.com" className="inline-flex items-center gap-1.5 hover:text-emerald-700"><i className="bi bi-envelope text-emerald-600" aria-hidden="true" />info@artsongroup.com</a>
-            <span className="hidden items-center gap-1.5 md:inline-flex"><i className="bi bi-alarm text-emerald-600" aria-hidden="true" />9.00 am - 5.30 pm</span>
-          </div>
-          <div className="hidden shrink-0 items-center gap-3 text-xs text-slate-400 sm:flex" aria-hidden="true">
-            <i className="bi bi-facebook" />
-            <i className="bi bi-twitter" />
-            <i className="bi bi-linkedin" />
-            <i className="bi bi-pinterest" />
-          </div>
-        </div>
-      </div>
       <nav className="mx-auto flex min-h-14 max-w-[1240px] items-center justify-between px-5 sm:px-8 lg:px-10" aria-label="Main navigation">
         <Link href="/" className="flex items-center gap-3" aria-label="ArtSonGroup home">
           <span className="brand-mark" aria-hidden="true"><span>A</span></span>
