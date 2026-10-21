@@ -227,6 +227,126 @@
   }
 }
 
+@media print {
+  body:has(.privacy-policy-page) > header,
+  body:has(.privacy-policy-page) > footer,
+  body:has(.terms-page) > header,
+  body:has(.terms-page) > footer,
+  .privacy-policy-page .privacy-actions,
+  .privacy-policy-page .privacy-toc,
+  .terms-page .terms-actions,
+  .terms-page .terms-toc {
+    display: none !important;
+  }
+
+  body:has(.privacy-policy-page),
+  body:has(.privacy-policy-page) main,
+  .privacy-policy-page {
+    min-height: 0 !important;
+    background: #fff !important;
+  }
+
+  body:has(.terms-page),
+  body:has(.terms-page) main,
+  .terms-page {
+    min-height: 0 !important;
+    background: #fff !important;
+  }
+
+  .privacy-policy-page > section:first-child,
+  .privacy-policy-page > div,
+  .privacy-policy-page > footer {
+    padding: 0 !important;
+  }
+
+  .terms-page > section:first-child,
+  .terms-page > div,
+  .terms-page > footer {
+    padding: 0 !important;
+  }
+
+  .privacy-policy-page > section:first-child {
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  .terms-page > section:first-child {
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  .privacy-policy-page > div {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  .privacy-policy-page .privacy-toc,
+  .privacy-policy-page .privacy-policy-content {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .terms-page > div {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  .terms-page .terms-toc,
+  .terms-page .terms-content {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .privacy-policy-page *,
+  .privacy-policy-page *::before,
+  .privacy-policy-page *::after,
+  .terms-page *,
+  .terms-page *::before,
+  .terms-page *::after {
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .privacy-policy-page article section,
+  .terms-page article section {
+    break-inside: avoid;
+    border: 0 !important;
+  }
+
+  .privacy-policy-page h1,
+  .privacy-policy-page h2,
+  .privacy-policy-page p,
+  .privacy-policy-page li,
+  .terms-page h1,
+  .terms-page h2,
+  .terms-page p,
+  .terms-page li {
+    color: #111827 !important;
+  }
+
+  .privacy-policy-page > footer {
+    margin-top: 1rem;
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  .terms-page > footer {
+    margin-top: 1rem;
+    border: 0 !important;
+    background: #fff !important;
+  }
+}
+
 /* ── Hero section ─────────────────────────────────── */
 .hero-section {
   overflow: hidden;
